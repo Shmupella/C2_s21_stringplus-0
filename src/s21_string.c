@@ -4,7 +4,7 @@ void *s21_memchr(const void *str, int c, s21_size_t n) {
   unsigned char *ptr;
   unsigned char chr = (unsigned char)c;
   ptr = (unsigned char *)str;
-  unsigned char *check = s21_NULL;
+  unsigned char *check = S21_NULL;
   while (n != 0) {
     if (*ptr == chr) {
       check = ptr;
@@ -83,7 +83,7 @@ char *s21_strncat(char *dest, const char *src, s21_size_t n) {
 }
 
 char *s21_strchr(const char *str, int c) {
-  char *check = s21_NULL;
+  char *check = S21_NULL;
   while (*str != '\0') {
     if (*str == (unsigned char)c) {
       check = (char *)str;
@@ -197,9 +197,9 @@ s21_size_t s21_strlen(const char *str) {
 }
 
 char *s21_strpbrk(const char *str1, const char *str2) {
-  char *returnVal = s21_NULL;
+  char *returnVal = S21_NULL;
   int i = 0;
-  while (str1[i] != '\0' && returnVal == s21_NULL) {
+  while (str1[i] != '\0' && returnVal == S21_NULL) {
     for (int j = 0; str2[j] != '\0'; j++) {
       if (str1[i] == str2[j]) {
         returnVal = ((char *)str1) + i;
@@ -213,7 +213,7 @@ char *s21_strpbrk(const char *str1, const char *str2) {
 
 char *s21_strrchr(const char *str, int c) {
   int size = s21_strlen(str);
-  char *res = s21_NULL;
+  char *res = S21_NULL;
   while (size >= 0) {
     if (str[size] == (char)c) {
       res = ((char *)str + size);
@@ -261,7 +261,7 @@ char *s21_strstr(const char *haystack, const char *needle) {
       ++j;
     }
   }
-  return s21_NULL;
+  return S21_NULL;
 }
 
 char *s21_strtok(char *str, const char *delim) {
@@ -451,10 +451,10 @@ void *s21_to_lower(const char *str) {
   return (char *)tmp;
 }
 
-void *insert(const char *src, const char *str, s21_size_t start_index) {
+void *s21_insert(const char *src, const char *str, s21_size_t start_index) {
   s21_size_t length_str = 0;
   s21_size_t length_src = 0;
-  void *tmp = s21_NULL;
+  void *tmp = S21_NULL;
   if (src && str) {
     length_src = s21_strlen(src);
     if (start_index <= length_src) {
@@ -464,7 +464,7 @@ void *insert(const char *src, const char *str, s21_size_t start_index) {
       s21_memcpy((char *)(tmp + start_index), (char *)str, length_str);
       s21_memcpy(((char *)tmp + start_index + length_str),
                  ((char *)src + start_index), length_src - start_index);
-      ((char *)tmp)[n] = '\0';
+      ((char *)tmp)[length_src + length_str] = '\0';
     }
   }
   return tmp;

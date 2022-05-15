@@ -21,10 +21,10 @@ s21_string.o: s21_string.c
 test: s21_string.a
 ifeq ($(OS), Darwin)
 	$(CC) $(CFLAGS) test.c s21_string.a -o test.out $(LIBS)
-	./test.out
+	./test.out; exit 0
 else
 	$(CC) $(CFLAGS) test.c s21_string.a -o test.out $(LIBS) $(LINUX)
-	./test.out
+	./test.out; exit 0
 endif
 
 gcov_report:
