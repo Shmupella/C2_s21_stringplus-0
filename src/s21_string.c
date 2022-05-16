@@ -167,25 +167,22 @@ s21_size_t s21_strcspn(const char *str1, const char *str2) {
 }
 
 char *s21_strerror(int errnum) {
-  char *text = S21_NULL;
-  if (errnum < 0 || errnum > ERRLIST_LEN - 1) {
-    static char unk[33] = "Unknown error";
-    if (ERRLIST_LEN == APPL) {
-      char tmp[33] = ": ";
-      s21_strcat(unk, tmp);
-    } else {
-      char tmp[33] = " ";
-      s21_strcat(unk, tmp);
-    }
-    char err[33] = "";
-    itoa(errnum, err);
-    s21_strcat(unk, err);
-    text = unk;
+  static char massError[1024];
+  char *result = massError;
+  if (errnum < 0 || errnum >= MAX_NUM) {
+    char str[80];
+    s21_sprintf(str, "%d", errnum);
+    s21_strcpy(result, "Unknown error");
+#if defined(__APPLE__)
+    s21_strcat(result, ":");
+#endif
+    s21_strcat(result, " ");
+    s21_strcat(result, str);
   } else {
-    static char *spisok[] = ERRLIST;
-    text = (char *)spisok[errnum];
+    char *mass[MAX_NUM] = ERRLIST;
+    s21_strcpy(result, mass[errnum]);
   }
-  return text;
+  return result;
 }
 
 s21_size_t s21_strlen(const char *str) {
