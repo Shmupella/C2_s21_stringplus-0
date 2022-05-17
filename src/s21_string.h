@@ -37,7 +37,7 @@ struct fsc {
 typedef unsigned s21_size_t;
 typedef unsigned long s21_size_t_long;
 
-#define S21_NULL ((void *)0)
+#define s21_NULL ((void *)0)
 
 #if defined(__APPLE__)
 #define MAX_NUM 107
